@@ -13,7 +13,7 @@ export const authSuccess = (message, status, login, retrievedLogin = 0) => {
   if(status === 'ok') {
     if(!retrievedLogin) {
       let now = new Date().getTime();
-      now = now + process.env.SESSION_EXPIRATION_TIME*60*60*1000;
+      now = now + 24*60*60*1000;
       localStorage.setItem('userLoggedIn', login);
       localStorage.setItem('successMessage', message);
       localStorage.setItem('setupTime', now);
@@ -89,7 +89,7 @@ export const tryInitAuth = () => {
       } else {
         const message = localStorage.getItem('successMessage');
         let now = new Date().getTime();
-        now = now + process.env.SESSION_EXPIRATION_TIME*60*60*1000;
+        now = now + 24*60*60*1000;
         localStorage.setItem('setupTime', now);
         dispatch(authSuccess(message, 'ok', loggedUser, 1));
       }
